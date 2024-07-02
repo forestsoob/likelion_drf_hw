@@ -51,6 +51,6 @@ def song_read_create(request, singer_id):
     elif request.method == 'POST':
         serializer = SongSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(Singer=singer)
+            serializer.save(singer=singer)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)

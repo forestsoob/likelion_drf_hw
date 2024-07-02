@@ -5,6 +5,7 @@ class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = '__all__'
+        read_only_fields = ['singer']
 
 class SingerSerializer(serializers.ModelSerializer):
     id = serializers.CharField(read_only=True)
@@ -16,7 +17,7 @@ class SingerSerializer(serializers.ModelSerializer):
     def get_songs(self, instance):
         # Singer 객체와 연결된 Song 객체들을 가져오기 위해
         # instance.songs.all()로 관계된 Song 객체들을 가져옵니다.
-        songs = instance.song_set.all()
+        songs = instance.songs.all()
         serializer = SongSerializer(songs, many=True)
         return serializer.data
 
