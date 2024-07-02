@@ -44,7 +44,7 @@ def song_read_create(request, singer_id):
     singer = get_object_or_404(Singer, id=singer_id)
 
     if request.method == 'GET':
-        songs = Song.objects.filter(Singer=singer)
+        songs = Song.objects.filter(singer=singer)
         serializer = SongSerializer(songs, many=True)
         return Response(serializer.data)
     
